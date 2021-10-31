@@ -1,9 +1,5 @@
 FROM python:latest
-WORKDIR /app
+WORKDIR /server
 COPY . .
 RUN pip install -r requirements.txt
-ADD server.py /server/
-WORKDIR /server/
-
-
-
+ADD server.py /server

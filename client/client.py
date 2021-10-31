@@ -2,10 +2,6 @@
 
 import hashlib
 
-# Импортируем системную библиотеку Python.
-# Она используется для загрузки файла 'index.html' с сервера.
-# Ничего особенного устанавливать не нужно, эта библиотека устанавливается вместе с Python.
-
 import requests
 from nanoid import generate
 
@@ -13,16 +9,7 @@ from nanoid import generate
 def get_checksum(text):
     return hashlib.md5(text.encode()).hexdigest()
 
-
-#fp = urllib.request.urlopen("http://localhost:1234/")
-
-# 'encodedContent' соответствует закодированному ответу сервера нашего файла.
-# 'decodedContent' соответствует раскодированному ответу сервера (тут будет то, что мы хотим вывести на экран).
-content = requests.get('http://localhost:1234/')
-#encodedContent = fp.read()
-#decodedContent = encodedContent.decode("utf8")
-
-# Выводим содержимое файла, полученного с сервера ('index.html').
+content = requests.get('http://server:1234/')
 original_checksum = content.headers['checksum']
 file_content = content.text    
 if original_checksum==get_checksum(file_content):

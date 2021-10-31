@@ -1,13 +1,19 @@
 version: "3"
-volumes:
-  servervol:
-  clientvol:
+networks:
+  etworkame:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.147.0/24
 services:
   server:
     volumes: 
      - servervol:/server/serverdata
     build: server/
     command: python ./server.py
+    networks:
+      etworkame:
+        ipv4_address: 172.16.147.100
     ports:
       - 1234:1234
   client:
@@ -15,10 +21,12 @@ services:
      - clientvol:/client/clientdata
     build: client/
     command: python ./client.py
-    network_mode: host
     depends_on:
       - server
+    networks:
+      etworkame:
+        ipv4_address: 172.16.147.99
 
-
-
-  
+volumes:
+  servervol:
+  clientvol:

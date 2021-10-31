@@ -1,6 +1,5 @@
 FROM python:latest
-WORKDIR /app
+WORKDIR /client
 COPY . .
-ADD client.py /client/
+ADD client.py /client
 RUN pip install -r requirements.txt
-WORKDIR /client/
